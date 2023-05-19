@@ -18,6 +18,7 @@ local plugins = {
  'nvim-lualine/lualine.nvim',
  'lukas-reineke/indent-blankline.nvim',
  'lewis6991/gitsigns.nvim',
+  'vim-test/vim-test',
   'folke/neodev.nvim', -- Lua language server configuration for nvim
 {
     "nvim-treesitter/nvim-treesitter",
