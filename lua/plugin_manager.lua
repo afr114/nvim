@@ -18,10 +18,11 @@ local plugins = {
  'nvim-lualine/lualine.nvim',
  'lukas-reineke/indent-blankline.nvim',
  'lewis6991/gitsigns.nvim',
-  'vim-test/vim-test',
-  'folke/neodev.nvim', -- Lua language server configuration for nvim
-{
-    "nvim-treesitter/nvim-treesitter",
+ 'vim-test/vim-test',
+ 'yegappan/mru',
+  'https://github.com/gioele/vim-autoswap',
+ 'folke/neodev.nvim', -- Lua language server configuration for nvim 
+  { "nvim-treesitter/nvim-treesitter",
     config = function()
       require("nvim-treesitter.configs").setup({
         highlight = {
@@ -33,6 +34,21 @@ local plugins = {
       })
     end,
   },
+ { "https://github.com/booperlv/nvim-gomove",
+   config = function()
+		require("gomove").setup({
+  -- whether or not to map default key bindings, (true/false)
+  map_defaults = false,
+  -- whether or not to reindent lines moved vertically (true/false)
+  reindent = true,
+  -- whether or not to undojoin same direction moves (true/false)
+  undojoin = true,
+  -- whether to not to move past end column when moving blocks horizontally, (true/false)
+  move_past_end_col = false,
+})
+	end,
+
+ },
 {
   "williamboman/mason.nvim",
   build = ":MasonUpdate", -- :MasonUpdate updates registry contents
