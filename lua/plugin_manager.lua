@@ -14,14 +14,16 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
  'tpope/vim-fugitive', -- git commands in neovim
+ 'tpope/vim-commentary',
  'numToStr/Comment.nvim', -- "gc" to comment visual regions/lines,
  'nvim-lualine/lualine.nvim',
  'lukas-reineke/indent-blankline.nvim',
  'lewis6991/gitsigns.nvim',
  'vim-test/vim-test',
  'yegappan/mru',
-  'https://github.com/gioele/vim-autoswap',
- 'folke/neodev.nvim', -- Lua language server configuration for nvim 
+ 'https://github.com/gioele/vim-autoswap',
+ 'folke/neodev.nvim', -- Lua language server configuration for nvim
+  'metakirby5/codi.vim',
   { "nvim-treesitter/nvim-treesitter",
     config = function()
       require("nvim-treesitter.configs").setup({
@@ -71,6 +73,9 @@ local plugins = {
   },
 },
 {
+  "https://github.com/mfussenegger/nvim-dap"
+},
+{
   "nvim-neo-tree/neo-tree.nvim",
   version = "*",
   dependencies = {
@@ -79,7 +84,11 @@ local plugins = {
     "MunifTanjim/nui.nvim",
   },
     config = function()
-      require("neo-tree").setup()
+      require("neo-tree").setup({
+        filesystem = {
+          hijack_netrw_behavior = "disabled",
+        }
+      })
     end,
 },
 {
@@ -108,6 +117,19 @@ local plugins = {
     -- NOTE: If you have trouble with this installation, refer to the README for telescope-fzf-native.
     build = 'make',
   },
+{
+    "kelly-lin/telescope-ag",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+},
+{
+  "EtiamNullam/deferred-clipboard.nvim",
+   config = function() 
+	require('deferred-clipboard').setup({
+  lazy = true,
+  fallback = 'unnamedplus'
+  })
+   end,
+}
 }
 
 

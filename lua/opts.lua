@@ -37,7 +37,7 @@ local default_options = {
     splitright = true, -- force all vertical splits to go to the right of current window
     swapfile = false, -- creates a swapfile
     tabstop = 2, -- insert 2 spaces for a tab
-    termguicolors = true,
+    termguicolors = false,
     timeoutlen = 1000, -- time to wait for a mapped sequence to complete (in milliseconds)
     title = true, -- set the title of window to the value of the titlestring
     titlestring = "%<%F%=%l/%L - nvim", -- what the title of the window will be set to
