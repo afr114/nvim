@@ -77,6 +77,14 @@ nvim_lsp.tsserver.setup{
   end,
 }
 
+nvim_lsp.gopls.setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = { "gopls"},
+  filetypes = { "go", "gomod", "gowork", "gotmpl" },
+  root_dir = nvim_lsp.util.root_pattern("go.work", "go.mod")
+}
+
 nvim_lsp.solargraph.setup{
   capabilities = capabilities,
   filtetype = { "ruby"}

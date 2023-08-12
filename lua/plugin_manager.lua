@@ -129,7 +129,9 @@ local plugins = {
   fallback = 'unnamedplus'
   })
    end,
-}
+},
+{ "https://github.com/fatih/vim-go" },
+{ "https://github.com/leoluz/nvim-dap-go"}
 }
 
 
