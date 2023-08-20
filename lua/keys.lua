@@ -17,6 +17,9 @@ map("x", "<C-S-Down>", "<Plug>GoVSMDown", {})
 map("x", "<C-S-Up>", "<Plug>GoVSMUp", {})
 map("x", "<C-S-Right>", "<Plug>GoVSMRight", {})
 
+-- keys for faster development
+map("n", "<leader>s", ":w<CR>", {noremap=true, silent=true})
+map("n", "<leader>sq", ":wq!<CR>", {noremap=true, silent=true})
 -- nvim-ag
 vim.api.nvim_set_keymap('n', '<leader>w', ':Ag ', {noremap = true})
 
