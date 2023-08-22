@@ -22,4 +22,7 @@ map("n", "<leader>s", ":w<CR>", {noremap=true, silent=true})
 map("n", "<leader>sq", ":wq!<CR>", {noremap=true, silent=true})
 -- nvim-ag
 vim.api.nvim_set_keymap('n', '<leader>w', ':Ag ', {noremap = true})
+-- toggle-term
+vim.api.nvim_set_keymap('n', '<leader>t', ':split | terminal<CR>:call feedkeys("i")<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<space>t', ':vsplit | terminal<CR>:call feedkeys("i")<CR>', { noremap = true, silent = true })
 

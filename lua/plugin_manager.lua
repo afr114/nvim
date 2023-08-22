@@ -20,7 +20,7 @@ local plugins = {
  'lukas-reineke/indent-blankline.nvim',
  'lewis6991/gitsigns.nvim',
  'vim-test/vim-test',
- 'yegappan/mru',
+  'yegappan/mru',
  'https://github.com/gioele/vim-autoswap',
  'folke/neodev.nvim', -- Lua language server configuration for nvim
   'metakirby5/codi.vim',
