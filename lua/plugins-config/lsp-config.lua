@@ -7,6 +7,11 @@ end
 local luasnip = require("luasnip")
 local cmp = require("cmp")
 
+require("lspconfig").sourcekit.setup{
+  cmd = {'/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp'}
+}
+
+
 cmp.setup({
 
 snippet = {
@@ -90,6 +95,19 @@ nvim_lsp.solargraph.setup{
   filtetype = { "ruby"}
 }
 
+nvim_lsp.sourcekit.setup{
+  on_attach = on_attach,
+  cmd = {"xcrun", "sourcekit-lsp", "--log-level", "error" };
+  filetypes = {"swift", "c", "cpp", "objc", "objcpp"};
+  root_dir = nvim_lsp.util.root_pattern("compile_commands.json", ".git");
+  capabilities = capabilities;
+}
+
+-- Equivalent of the autocmd for swift files
+-- vim.cmd [[
+--   autocmd FileType swift autocmd BufWritePost *.swift :silent exec "!swiftformat %"
+-- ]]
+
 -- Enable completion for TypeScript and JavaScript
 vim.cmd("autocmd FileType typescript,javascript setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 -- Global mappings.
@@ -129,5 +147,19 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, opts)
   end,
 })
+
+-- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
+-- vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
+--
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    -- Enable signs
+    signs = true,
+    -- Enable virtual text
+    virtual_text = true,
+    -- Show line diagnostics on hover
+    update_in_insert = false,
+  }
+)
 
 
