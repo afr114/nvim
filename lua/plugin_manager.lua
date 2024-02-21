@@ -17,13 +17,15 @@ local plugins = {
   'tpope/vim-commentary',
   'numToStr/Comment.nvim', -- "gc" to comment visual regions/lines,
   'nvim-lualine/lualine.nvim',
-  'lukas-reineke/indent-blankline.nvim',
   'lewis6991/gitsigns.nvim',
   'vim-test/vim-test',
   'yegappan/mru',
   'https://github.com/gioele/vim-autoswap',
   'folke/neodev.nvim', -- Lua language server configuration for nvim
   'metakirby5/codi.vim',
+  { "lukas-reineke/indent-blankline.nvim", 
+    config = function() require("ibl").setup() end, main = "ibl", opts = {} 
+  },
   { "nvim-treesitter/nvim-treesitter",
       config = function()
         require("nvim-treesitter.configs").setup({
