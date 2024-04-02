@@ -23,6 +23,7 @@ local plugins = {
   'https://github.com/gioele/vim-autoswap',
   'folke/neodev.nvim', -- Lua language server configuration for nvim
   'metakirby5/codi.vim',
+  'mg979/vim-visual-multi',
   { "lukas-reineke/indent-blankline.nvim", 
     config = function() require("ibl").setup() end, main = "ibl", opts = {} 
   },
