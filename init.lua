@@ -44,7 +44,6 @@ for _, v in ipairs(match) do
 end
 
   if #match > 0 then
-      print('APPPLE')
       local lnum = tonumber(match[2])
       print("Line number:", lnum)
       local message = match[4]

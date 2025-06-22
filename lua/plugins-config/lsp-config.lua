@@ -1,7 +1,10 @@
 local has_words_before = function()
-  unpack = unpack or table.unpack
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+   local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+    if col == 0 then
+        return false
+    end
+    local line_text = vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
+    return not line_text:sub(col, col):match("%s")
 end
 
 local luasnip = require("luasnip")
@@ -26,18 +29,19 @@ snippet = {
 
 
   sources = {
+    { name = "minuet"},
     { name = "nvim_lua" },
     { name = "nvim_lsp" },
     { name = "path" },
     { name = "luasnip" },
-    { name = "buffer", keyword_length = 5 },
+    { name = "buffer", keyword_length = 1 },
   },
 
 
   mapping = {
-   ['<CR>'] = cmp.mapping.confirm({select = true}),
+   ['<cr>'] = cmp.mapping.confirm({select = true}),
 
-     ["<Up>"] = cmp.mapping(function(fallback)
+     ["<up>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
@@ -47,7 +51,7 @@ snippet = {
       end
     end, { "i", "s" }),
 
-["<Down>"] = cmp.mapping(function(fallback)
+  ["<down>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
@@ -71,7 +75,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 -- Setup tsserver language server with specified filetypes, root directory, and on_attach function
-nvim_lsp.tsserver.setup{
+nvim_lsp.ts_ls.setup{
   capabilities = capabilities,
   filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
   root_dir = nvim_lsp.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
@@ -97,7 +101,7 @@ nvim_lsp.solargraph.setup{
 
 nvim_lsp.sourcekit.setup{
   on_attach = on_attach,
-  cmd = {"xcrun", "sourcekit-lsp", "--log-level", "error" };
+  cmd = {"xcrun", "sourcekit-lsp"};
   filetypes = {"swift", "c", "cpp", "objc", "objcpp"};
   root_dir = nvim_lsp.util.root_pattern("compile_commands.json", ".git");
   capabilities = capabilities;
