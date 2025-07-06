@@ -167,98 +167,85 @@ local plugins = {
   -- AI powered code understanding and generation
   --
   {
-  "yetone/avante.nvim",
-  event = "VeryLazy",
-  lazy = false,
-  version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
-  opts = {
-    -- add any opts here
-    -- for example
-    provider = "openai",
-    openai = {
-      endpoint = "https://api.openai.com/v1",
-      model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
-      timeout = 30000, -- timeout in milliseconds
-      temperature = 0, -- adjust if needed
-      max_tokens = 4096,
-    },
-    ollama = {
-      model = "qwen2.5-coder:32b",
-      options = {
-        -- num_ctx = 32768,
-        -- temperature = 0,
-        -- num_gpu = 1,
-          num_keep = 5,
-    seed = 42,
-    num_predict = 100,
-    top_k = 50,              
-    top_p = 0.9,
-    min_p = 0.0,
-    typical_p = 0.7,
-    repeat_last_n = 128,     
-    temperature = 0.65,      
-    repeat_penalty = 1.1,    
-    presence_penalty = 1.3,  
-    frequency_penalty = 0.8, 
-    mirostat = 2,            
-    mirostat_tau = 5.0,      
-    mirostat_eta = 0.1,      
-    penalize_newline = true,
-    uma= false,
-    num_ctx = 2048,          
-    num_batch = 4,           
-    num_gpu = 1,
-    main_gpu = 0,
-    low_vram = true,         
-    vocab_only = false,
-    use_mmap = true,
-    use_mlock = false,
-    num_thread = 4 
-      },
-      stream = true
-    }
-  },
-  -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-  build = "make",
-  -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-  dependencies = {
-    "stevearc/dressing.nvim",
-    "nvim-lua/plenary.nvim",
-    "MunifTanjim/nui.nvim",
-    --- The below dependencies are optional,
-    "echasnovski/mini.pick", -- for file_selector provider mini.pick
-    "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-    "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-    "ibhagwan/fzf-lua", -- for file_selector provider fzf
-    "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-    "zbirenbaum/copilot.lua", -- for providers='copilot'
-    {
-      -- support for image pasting
-      "HakonHarnes/img-clip.nvim",
-      event = "VeryLazy",
-      opts = {
-        -- recommended settings
-        default = {
-          embed_image_as_base64 = false,
-          prompt_for_file_name = false,
-          drag_and_drop = {
-            insert_mode = true,
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    lazy = false,
+    version = false,
+    opts = {
+      provider = "openai",
+      providers = {
+        openai = {
+          endpoint = "https://api.openai.com/v1",
+          model = "gpt-4o",
+          extra_request_body = {
+            timeout = 30000,
+            temperature = 0,
+            max_tokens = 4096,
           },
-          -- required for Windows users
-          use_absolute_path = true,
+        },
+        ollama = {
+          model = "qwen2.5-coder:32b",
+          stream = true,
+          extra_request_body = {
+            options = {
+              num_keep = 5,
+              seed = 42,
+              num_predict = 100,
+              top_k = 50,
+              top_p = 0.9,
+              min_p = 0.0,
+              typical_p = 0.7,
+              repeat_last_n = 128,
+              temperature = 0.65,
+              repeat_penalty = 1.1,
+              presence_penalty = 1.3,
+              frequency_penalty = 0.8,
+              mirostat = 2,
+              mirostat_tau = 5.0,
+              mirostat_eta = 0.1,
+              penalize_newline = true,
+              uma = false,
+              num_ctx = 2048,
+              num_batch = 4,
+              num_gpu = 1,
+              main_gpu = 0,
+              low_vram = true,
+              vocab_only = false,
+              use_mmap = true,
+              use_mlock = false,
+              num_thread = 4,
+            },
+          },
         },
       },
     },
-    {
-      -- Make sure to set this up properly if you have lazy=true
-      'MeanderingProgrammer/render-markdown.nvim',
-      opts = {
-        file_types = { "markdown", "Avante" },
+    build = "make",
+    dependencies = {
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "echasnovski/mini.pick",
+      "nvim-telescope/telescope.nvim",
+      "hrsh7th/nvim-cmp",
+      "ibhagwan/fzf-lua",
+      "nvim-tree/nvim-web-devicons",
+      "zbirenbaum/copilot.lua",
+      {
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+            use_absolute_path = true,
+          },
+        },
       },
-      ft = { "markdown", "Avante" },
     },
   },
-},
 
   -- Fuzzy Finder
   {
