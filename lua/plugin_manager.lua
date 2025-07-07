@@ -16,7 +16,7 @@ local plugins = {
   -- Git utilities
   "tpope/vim-fugitive", -- Git commands in Neovim
   "lewis6991/gitsigns.nvim", -- Git signs
-
+  'vim-test/vim-test',
   -- Commenting
   "tpope/vim-commentary",
   "numToStr/Comment.nvim", -- "gc" to comment visual regions/lines
