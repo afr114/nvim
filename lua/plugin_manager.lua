@@ -312,7 +312,6 @@ local plugins = {
   config = function(_, opts)
       local snacks = require("snacks")
       snacks.setup(opts)           -- applies your opts.dim (and other snack features)
-      snacks.dim.enable(opts.dim)  -- turns on the dimming immediately
     end,  
 },
 
