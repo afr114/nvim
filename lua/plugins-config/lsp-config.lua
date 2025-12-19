@@ -109,27 +109,20 @@ lspconfig.gopls.setup {
 
 -- Ruby (Solargraph)
 -- Ruby (Solargraph)
+--
 lspconfig.solargraph.setup {
+  cmd = { vim.fn.stdpath("data") .. "/mason/bin/solargraph", "stdio" },
   on_attach    = on_attach,
   capabilities = capabilities,
-
-  -- Use your local Bundler context (Gemfile.local or Gemfile)
-  cmd          = { "bundle", "exec", "solargraph", "stdio" },
-
-  -- Find the root directory using Gemfile.local, Gemfile, or .git
   root_dir     = util.root_pattern("Gemfile.local", "Gemfile", ".git"),
-
-  -- Disable RuboCop diagnostics to avoid load errors from missing cops
   settings     = {
     solargraph = {
-      rbsPath = false,
       diagnostics = {
-        rubocop = { enabled = false }
+        rubocop = { enabled = false } -- avoid rubocop-related load errors
       }
     }
   },
-
-  filetypes    = { "ruby" },
+  filetypes    = { "ruby" }
 }
 
 -- Swift / C / C++ / Objective-C (sourcekit)
